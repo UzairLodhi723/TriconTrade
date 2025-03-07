@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 export default function Nav({ open }) {
   const navigate = useNavigate();
@@ -29,7 +29,7 @@ export default function Nav({ open }) {
   };
 
   return (
-    <div className="fixed w-screen z-30">
+    <div className="fixed w-screen z-30" style={{display:"none"}}>
       <div>
         <ul className="flex justify-between bg-[#131722] h-[70px] text-white w-[100%] p-5">
           <div>
@@ -40,7 +40,7 @@ export default function Nav({ open }) {
           <div className="text-[20px] font-bold  text-white ">
             {!localStorage.getItem("authToken") ? (
               <div className=" flex">
-                <li className="mx-2 text-[15px] sm:text-[18px] md:text-xl">
+                {/* <li className="mx-2 text-[15px] sm:text-[18px] md:text-xl">
                   <button
                     onClick={() => {
                       open[0](true);
@@ -57,7 +57,7 @@ export default function Nav({ open }) {
                   >
                     SignUp
                   </button>
-                </li>
+                </li> */}
               </div>
             ) : (
               <div className=" flex text-[15px] sm:text-[18px] md:text-xl">
