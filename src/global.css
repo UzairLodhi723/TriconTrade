@@ -1,0 +1,82 @@
+@import "@fontsource-variable/dm-sans";
+@import "@fontsource/barlow/400.css";
+@import "@fontsource/barlow/500.css";
+@import "@fontsource/barlow/600.css";
+@import "@fontsource/barlow/700.css";
+@import "@fontsource/barlow/800.css";
+
+.css-w2db07-MuiInputBase-input-MuiOutlinedInput-input:-webkit-autofill {
+    -webkit-box-shadow:"0 0 0 100px #fff ";
+    -webkit-text-fill-color:"";
+    caret-color:"";
+}
+@import 'simplebar-react/dist/simplebar.min.css';
+
+.simplebar-scrollbar:before {
+  background-color: var(--palette-text-disabled);
+}
+.simplebar-scrollbar.simplebar-visible:before {
+  opacity: 0.48;
+}
+.ModalImage{
+  width: 125px;
+  height: 125px;
+  object-fit: cover;
+}
+
+.apexcharts-canvas {
+  /**
+  * Tooltip
+  */
+  .apexcharts-tooltip {
+    min-width: 80px;
+    border-radius: 10px;
+    backdrop-filter: blur(6px);
+    color: var(--palette-text-primary);
+    box-shadow: var(--customShadows-dropdown);
+    background-color: rgba(var(--palette-background-defaultChannel) / 0.9);
+  }
+  .apexcharts-xaxistooltip {
+    border-radius: 10px;
+    border-color: transparent;
+    backdrop-filter: blur(6px);
+    color: var(--palette-text-primary);
+    box-shadow: var(--customShadows-dropdown);
+    background-color: rgba(var(--palette-background-defaultChannel) / 0.9);
+    &::before {
+      border-bottom-color: rgba(var(--palette-grey-500Channel) / 0.16);
+    }
+    &::after {
+      border-bottom-color: rgba(var(--palette-background-defaultChannel) / 0.9);
+    }
+  }
+  .apexcharts-tooltip-title {
+    font-weight: 700;
+    text-align: center;
+    color: var(--palette-text-secondary);
+    background-color: var(--palette-background-neutral);
+  }
+  /**
+  * Tooltip: group
+  */
+  .apexcharts-tooltip-series-group {
+    padding: 4px 12px;
+  }
+  .apexcharts-tooltip-marker {
+    margin-right: 8px;
+  }
+  /**
+  * Legend
+  */
+  .apexcharts-legend {
+    padding: 0;
+  }
+  .apexcharts-legend-marker {
+    margin-right: 6px;
+  }
+  .apexcharts-legend-text {
+    margin-left: 0;
+    padding-left: 0;
+    line-height: 18px;
+  }
+}
