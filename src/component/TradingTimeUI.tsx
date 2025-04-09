@@ -4,9 +4,13 @@ import { useState } from "react";
 import SignalUI from "./SignalUI"
 interface TimeProps{
     setShowTradingTime :()=> void
+    type?:string
+    Stock?:string
   }
   const TradingTimeUI:React.FC<TimeProps>=({
-    setShowTradingTime
+    setShowTradingTime,
+    type,
+    Stock
 }) => {
     const [selectedTime,setSelectedTime] = useState(false)
     const [Time,setTime] = useState("")
@@ -14,6 +18,7 @@ interface TimeProps{
     "1 minute", "2 minutes", "3 minutes",
     "4 minutes", "5 minutes", "10 minutes", "15 minutes"
   ];
+  console.log(type, Stock, Time)
 
   return (
     <Box>
@@ -90,7 +95,7 @@ interface TimeProps{
     </Box>
     {
         selectedTime && 
-        <SignalUI Time={Time} setSelectedTime = {() => setSelectedTime(!selectedTime)} />
+        <SignalUI Time={Time} setSelectedTime = {() => setSelectedTime(!selectedTime)} Stock={Stock} />
     }
     </Box>
   );

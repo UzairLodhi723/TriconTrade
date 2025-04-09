@@ -8,7 +8,14 @@ interface marketProps{
 const MarketSelectionUI:React.FC<marketProps>=({
   setShowMarket
 }) => {
+  const tradingTimes = [
+    "BHD/CNY OTC ", "AED/CNY OTC ", "SAR/CNY OTC",
+    "QAR/CNY OTC ", "OMR/CNY OTC", "OD/CNY OTC",
+  ];
       const [showTradingTime , setShowTradingTime] = useState(false)
+      const [showStock , setShowStock] = useState({value:"",type:false})
+      const [Stock , setStock] = useState("")
+
   return (
     <Box>
     <Box
@@ -61,7 +68,7 @@ const MarketSelectionUI:React.FC<marketProps>=({
             fullWidth
             variant="contained"
             sx={{ backgroundColor: "#2c2c2c", color: "#fff" }}
-            onClick={() => setShowTradingTime(true)}
+            onClick={() => setShowStock({value:"stock",type:true})}
             >
             STOCK
           </Button>
@@ -71,13 +78,33 @@ const MarketSelectionUI:React.FC<marketProps>=({
             fullWidth
             variant="contained"
             sx={{ backgroundColor: "#2c2c2c", color: "#fff" }}
-            onClick={() => setShowTradingTime(true)}
+            onClick={() => setShowStock({value:"otc",type:false})}
           >
             OTC
           </Button>
         </Grid>
       </Grid>
-
+      {
+        showStock.type && (
+      <Grid container spacing={2} mb={2}>
+        {tradingTimes.map((time) => (
+          <Grid size={{xs:4}} key={time}>
+            <Button
+              fullWidth
+              variant="contained"
+              sx={{ backgroundColor: "#2c2c2c", color: "#fff" }}
+              onClick={() =>{
+                setShowTradingTime(true)
+                setStock(time)
+              }}
+            >
+              {time}
+            </Button>
+          </Grid>
+        ))}
+      </Grid>
+        )
+      }
       <Button
         fullWidth
         variant="contained"
@@ -89,7 +116,7 @@ const MarketSelectionUI:React.FC<marketProps>=({
     </Box>
     {
       showTradingTime && 
-      <TradingTimeUI setShowTradingTime={()=> setShowTradingTime(!showTradingTime)} />
+      <TradingTimeUI setShowTradingTime={()=> setShowTradingTime(!showTradingTime)} type = {showStock.value} Stock = {Stock}  />
     }
     </Box>
   );

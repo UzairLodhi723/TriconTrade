@@ -4,10 +4,12 @@ import OTCMarket from "./OTCMarket";
 interface SignalProps{
     setSelectedTime :()=> void
     Time:String
+    Stock?:string
   }
  const SignalUI:React.FC<SignalProps> = ({
     Time,
-    setSelectedTime
+    setSelectedTime,
+    Stock
  }) => {
     const [ShowOTC , setShowOTC] = useState(false)
     const date = new Date()
@@ -48,7 +50,7 @@ interface SignalProps{
           PAIR
         </Typography>
         <Typography variant="body1">
-          <span style={{ color: "#ff5252" }}>CAD/JPY</span> | {date.toLocaleTimeString()} | {date.toLocaleDateString()} UTC-4
+          <span style={{ color: "#ff5252" }}>{Stock}</span> | {date.toLocaleTimeString()} | {date.toLocaleDateString()} UTC-4
         </Typography>
       </Box>
 
