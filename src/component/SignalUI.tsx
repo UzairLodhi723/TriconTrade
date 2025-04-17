@@ -80,7 +80,7 @@ interface SignalProps{
           T. TIME
         </Typography>
         <Typography variant="body1" fontWeight="bold">
-          {Time}
+          {Time}  {Time==="1"?"minute":"minutes"}
         </Typography>
       </Box>
 
