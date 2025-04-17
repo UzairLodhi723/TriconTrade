@@ -1,6 +1,7 @@
 import { Box, Button, Typography, Divider } from "@mui/material";
 import { useState } from "react";
 import OTCMarket from "./OTCMarket";
+import axios from "axios";
 interface SignalProps{
     setSelectedTime :()=> void
     Time:String
@@ -12,7 +13,27 @@ interface SignalProps{
     Stock
  }) => {
     const [ShowOTC , setShowOTC] = useState(false)
+    const [ResData , setResData] = useState(null)
     const date = new Date()
+      const handleSelectTime = () => {
+        console.log(Stock, Time+"m","api adtaa")
+        var config = {
+          method: "get",
+          url:`http://192.168.18.249:4000/api/v1/stock/?stock=${Stock}&time=${Time+"m"}`,
+          headers: { "Content-Type": "application/json" },
+        };
+        
+        axios(config).then(function (response:any) {
+          console.log(response.data);
+          if (response.data) {
+            setResData(response.data)
+            setShowOTC(true)
+          }
+        })
+        .catch(function (error:any) {
+          console.log(error);
+        });
+      }
   return (
     <Box>
     <Box
@@ -89,7 +110,7 @@ interface SignalProps{
           fullWidth
           variant="contained"
           sx={{ backgroundColor: "#2c2c2c", color: "#fff" }}
-          onClick={() => setShowOTC(true)}
+          onClick={() => handleSelectTime()}
         >
           GET A SIGNAL
         </Button>
@@ -105,7 +126,7 @@ interface SignalProps{
     </Box>
     {
         ShowOTC && 
-        <OTCMarket />
+        <OTCMarket ResData={ResData} />
     }
     </Box>
   );

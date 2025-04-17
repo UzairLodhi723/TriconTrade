@@ -1,7 +1,12 @@
 import { Box, Typography, Button, Card, CardContent, Divider } from "@mui/material";
 import { useState } from "react";
 
-export default function OTCMarket() {
+interface props{
+  ResData:any
+}
+
+export default function OTCMarket(ResData:props) {
+  console.log(ResData,"ResData")
     const [Lower , setLower] = useState(true)
   return (
     <Box sx={{ backgroundColor: "#121212", color: "#fff", p: 2, borderRadius: 2, width: "100%", maxWidth: 500, mt:2 }}>

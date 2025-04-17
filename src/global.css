@@ -4,7 +4,9 @@
 @import "@fontsource/barlow/600.css";
 @import "@fontsource/barlow/700.css";
 @import "@fontsource/barlow/800.css";
-
+.css-w2db07-MuiInputBase-input-MuiOutlinedInput-input{
+  color: #fff !important;
+}
 .css-w2db07-MuiInputBase-input-MuiOutlinedInput-input:-webkit-autofill {
     -webkit-box-shadow:"0 0 0 100px #fff ";
     -webkit-text-fill-color:"";

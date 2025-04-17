@@ -15,8 +15,8 @@ interface TimeProps{
     const [selectedTime,setSelectedTime] = useState(false)
     const [Time,setTime] = useState("")
   const tradingTimes = [
-    "1 minute", "2 minutes", "3 minutes",
-    "4 minutes", "5 minutes", "10 minutes", "15 minutes"
+    "1", "2", "3",
+    "4", "5", "10", "15"
   ];
   console.log(type, Stock, Time)
 
@@ -78,7 +78,7 @@ interface TimeProps{
                 setTime(time)
               }}
             >
-              {time}
+              {time} {time==="1"?"minute":"minutes"}
             </Button>
           </Grid>
         ))}
