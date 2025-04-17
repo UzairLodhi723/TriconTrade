@@ -2,6 +2,7 @@ import { Box, Button, Typography, Divider } from "@mui/material";
 import { useState } from "react";
 import OTCMarket from "./OTCMarket";
 import axios from "axios";
+import CircularProgress from '@mui/material/CircularProgress';
 interface SignalProps{
     setSelectedTime :()=> void
     Time:String
@@ -14,9 +15,11 @@ interface SignalProps{
  }) => {
     const [ShowOTC , setShowOTC] = useState(false)
     const [ResData , setResData] = useState(null)
+    const [loader , setloader] = useState(false)
     const date = new Date()
       const handleSelectTime = () => {
         console.log(Stock, Time+"m","api adtaa")
+        setloader(true)
         var config = {
           method: "get",
           url:`http://192.168.18.249:4000/api/v1/stock/?stock=${Stock}&time=${Time+"m"}`,
@@ -28,11 +31,13 @@ interface SignalProps{
           if (response.data) {
             setResData(response?.data?.Prediction)
             setShowOTC(true)
+            setloader(false)
           }
         })
         .catch(function (error:any) {
           console.log(error);
-        });
+          setloader(false)
+        })
       }
   return (
     <Box>
@@ -110,9 +115,13 @@ interface SignalProps{
           fullWidth
           variant="contained"
           sx={{ backgroundColor: "#2c2c2c", color: "#fff" }}
-          onClick={() => handleSelectTime()}
+          onClick={() => {
+            !loader &&
+            handleSelectTime()
+          } 
+        }
         >
-          GET A SIGNAL
+          {loader?<CircularProgress size={20}/>:"GET A SIGNAL"}
         </Button>
         <Button
           fullWidth

@@ -1,13 +1,16 @@
 import { Box, Typography, Button, Card, CardContent, Divider } from "@mui/material";
 import { useState } from "react";
+import MarketSelectionUI from "./MarketSelectionUI";
 
 interface props{
   ResData:any
 }
 
 export default function OTCMarket({ResData}:any) {
+    const [showMarket , setShowMarket] = useState(false)
   console.log(ResData,"ResData")
   return (
+    <Box>
     <Box sx={{ backgroundColor: "#121212", color: "#fff", p: 2, borderRadius: 2, width: "100%", maxWidth: 500, mt:2 }}>
       <Typography variant="h6" color="#bb86fc">OTC MARKET</Typography>
       <Typography variant="h3" fontWeight={700} color={ResData?.value==="LOWER"?"#e91e63":"#23A57A"}>{ResData?.value==="LOWER"?"LOWER":"HIGHER"}</Typography>
@@ -52,10 +55,15 @@ export default function OTCMarket({ResData}:any) {
         variant="contained"
         sx={{ mt: 2, backgroundColor: "#e91e63", '&:hover': { backgroundColor: "#c2185b" } }}
         fullWidth
-        onClick={() => {}}
+        onClick={() => {setShowMarket(!showMarket)}}
       >
         Retry
       </Button>
+    </Box>
+        {
+            showMarket && 
+            <MarketSelectionUI setShowMarket={() => setShowMarket(!showMarket)}/>
+        }
     </Box>
   );
 }

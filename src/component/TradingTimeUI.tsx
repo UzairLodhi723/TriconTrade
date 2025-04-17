@@ -72,7 +72,7 @@ interface TimeProps{
             <Button
               fullWidth
               variant="contained"
-              sx={{ backgroundColor: "#2c2c2c", color: "#fff" }}
+              sx={{ backgroundColor: "#2c2c2c", color: "#fff", borderColor: Time==time ? "white" :"#2c2c2c", border: Time === time ? "1px solid" :"none" }}
               onClick={() =>{
                 setSelectedTime(true)
                 setTime(time)

@@ -116,7 +116,7 @@ const MarketSelectionUI: React.FC<marketProps> = ({ setShowMarket }) => {
                     <Button
                       fullWidth
                       variant="contained"
-                      sx={{ backgroundColor: "#2c2c2c", color: "#fff" }}
+                      sx={{ backgroundColor:"#2c2c2c", color: "#fff", borderColor: Stock==time ? "white" :"#2c2c2c", border: Stock === time ? "1px solid" :"none" }}
                       onClick={() => {
                         setShowTradingTime(true);
                         setStock(time);
