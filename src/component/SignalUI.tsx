@@ -26,7 +26,7 @@ interface SignalProps{
         axios(config).then(function (response:any) {
           console.log(response.data);
           if (response.data) {
-            setResData(response.data)
+            setResData(response?.data?.Prediction)
             setShowOTC(true)
           }
         })
