@@ -7,11 +7,13 @@ interface SignalProps{
     setSelectedTime :()=> void
     Time:String
     Stock?:string
+    type?:string
   }
  const SignalUI:React.FC<SignalProps> = ({
     Time,
     setSelectedTime,
-    Stock
+    Stock,
+    type
  }) => {
     const [ShowOTC , setShowOTC] = useState(false)
     const [ResData , setResData] = useState(null)
@@ -64,8 +66,8 @@ interface SignalProps{
         <Typography variant="body1" fontWeight="bold">
           CURRENCIES
         </Typography>
-        <Typography variant="body2" fontWeight="bold" color="#888">
-          STOCK MARKET
+        <Typography variant="body2" fontWeight="bold" color="#888" textTransform={"uppercase"}>
+          {type} MARKET
         </Typography>
       </Box>
 

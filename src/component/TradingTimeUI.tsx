@@ -95,7 +95,7 @@ interface TimeProps{
     </Box>
     {
         selectedTime && 
-        <SignalUI Time={Time} setSelectedTime = {() => setSelectedTime(!selectedTime)} Stock={Stock} />
+        <SignalUI Time={Time} setSelectedTime = {() => setSelectedTime(!selectedTime)} Stock={Stock} type={type} />
     }
     </Box>
   );

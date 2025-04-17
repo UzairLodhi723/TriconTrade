@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Box, Button, Typography, TextField } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import TradingTimeUI from "./TradingTimeUI";
-import { OTCTimes, tradingTimes } from "../utils/Mock/MockData";
+import { currencySymbols, OTCTimes, tradingTimes } from "../utils/Mock/MockData";
 interface marketProps {
   setShowMarket: () => void;
 }
@@ -14,10 +14,10 @@ const MarketSelectionUI: React.FC<marketProps> = ({ setShowMarket }) => {
 
   const filteredTimes =
     showStock.value === "otc"
-      ? OTCTimes.filter((time) =>
+      ? currencySymbols.filter((time) =>
           time.toLowerCase().includes(search.toLowerCase())
         )
-      : tradingTimes.filter((time) =>
+      : currencySymbols.filter((time) =>
           time.toLowerCase().includes(search.toLowerCase())
         );
 
@@ -96,7 +96,7 @@ const MarketSelectionUI: React.FC<marketProps> = ({ setShowMarket }) => {
               <TextField
                 fullWidth
                 variant="outlined"
-                placeholder="Search Stock..."
+                placeholder="Search Currencies..."
                 value={search}
                 sx={{ color: "#fff", borderRadius: 2 }}
                 onChange={(e) => setSearch(e.target.value)}
@@ -116,7 +116,7 @@ const MarketSelectionUI: React.FC<marketProps> = ({ setShowMarket }) => {
                     <Button
                       fullWidth
                       variant="contained"
-                      sx={{ backgroundColor:"#2c2c2c", color: "#fff", borderColor: Stock==time ? "white" :"#2c2c2c", border: Stock === time ? "1px solid" :"none" }}
+                      sx={{ backgroundColor:"#2c2c2c", color: "#fff", borderColor: Stock===time ? "white" :"#2c2c2c", border: Stock === time ? "1px solid" :"none" }}
                       onClick={() => {
                         setShowTradingTime(true);
                         setStock(time);
