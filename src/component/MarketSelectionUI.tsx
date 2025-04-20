@@ -1,8 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Button, Typography, TextField } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import TradingTimeUI from "./TradingTimeUI";
-import { currencySymbols, OTCTimes, tradingTimes } from "../utils/Mock/MockData";
+import {
+  currencySymbols,
+  OTCTimes,
+  tradingTimes,
+} from "../utils/Mock/MockData";
 interface marketProps {
   setShowMarket: () => void;
 }
@@ -11,15 +15,27 @@ const MarketSelectionUI: React.FC<marketProps> = ({ setShowMarket }) => {
   const [showStock, setShowStock] = useState({ value: "", type: false });
   const [Stock, setStock] = useState("");
   const [search, setSearch] = useState("");
-
-  const filteredTimes =
-    showStock.value === "otc"
-      ? currencySymbols.filter((time) =>
-          time.toLowerCase().includes(search.toLowerCase())
-        )
-      : currencySymbols.filter((time) =>
-          time.toLowerCase().includes(search.toLowerCase())
-        );
+  const [filteredTimes, setFilteredTimes] = useState<string[]>([]);
+  useEffect(() => {
+    setFilteredTimes([]);
+    const filteredTimes =
+      showStock.value === "otc"
+        ? currencySymbols.filter((time) =>
+            time.toLowerCase().includes(search.toLowerCase())
+          )
+        : tradingTimes.filter((time) =>
+            time.toLowerCase().includes(search.toLowerCase())
+          );
+    setFilteredTimes(filteredTimes);
+  }, [search, showStock.value]);
+  // const filteredTimes =
+  //   showStock.value === "otc"
+  //     ? currencySymbols.filter((time) =>
+  //         time.toLowerCase().includes(search.toLowerCase())
+  //       )
+  //     : tradingTimes.filter((time) =>
+  //         time.toLowerCase().includes(search.toLowerCase())
+  //       );
 
   return (
     <Box>
@@ -73,7 +89,12 @@ const MarketSelectionUI: React.FC<marketProps> = ({ setShowMarket }) => {
             <Button
               fullWidth
               variant="contained"
-              sx={{ backgroundColor: "#2c2c2c", color: "#fff" }}
+              sx={{
+                backgroundColor: "#2c2c2c",
+                color: "#fff",
+                border: showStock.value === "stock" ? "1px solid" : "none",
+                borderColor: showStock.value === "stock" ? "white" : "none",
+              }}
               onClick={() => setShowStock({ value: "stock", type: true })}
             >
               STOCK
@@ -83,7 +104,12 @@ const MarketSelectionUI: React.FC<marketProps> = ({ setShowMarket }) => {
             <Button
               fullWidth
               variant="contained"
-              sx={{ backgroundColor: "#2c2c2c", color: "#fff" }}
+              sx={{
+                backgroundColor: "#2c2c2c",
+                color: "#fff",
+                border: showStock.value === "otc" ? "1px solid" : "none",
+                borderColor: showStock.value === "otc" ? "white" : "none",
+              }}
               onClick={() => setShowStock({ value: "otc", type: true })}
             >
               OTC
@@ -111,15 +137,21 @@ const MarketSelectionUI: React.FC<marketProps> = ({ setShowMarket }) => {
               justifyContent={"space-between"}
             >
               {filteredTimes.length > 0 ? (
-                filteredTimes.map((time) => (
-                  <Grid size={{ xs: 4 }} mt={1} key={time}>
+                filteredTimes.map((time, index) => (
+                  <Grid size={{ xs: 4 }} mt={1} key={index}>
                     <Button
                       fullWidth
                       variant="contained"
-                      sx={{ backgroundColor:"#2c2c2c", color: "#fff", borderColor: Stock===time ? "white" :"#2c2c2c", border: Stock === time ? "1px solid" :"none" }}
+                      sx={{
+                        backgroundColor: "#2c2c2c",
+                        color: "#fff",
+                        borderColor: Stock === time ? "white" : "#2c2c2c",
+                        border: Stock === time ? "1px solid" : "none",
+                      }}
                       onClick={() => {
                         setShowTradingTime(true);
                         setStock(time);
+                  
                       }}
                     >
                       {time}
@@ -127,13 +159,32 @@ const MarketSelectionUI: React.FC<marketProps> = ({ setShowMarket }) => {
                   </Grid>
                 ))
               ) : (
-                <Typography variant="body2" color="#fff" mt={1} textAlign={"center"}>
+                <Typography
+                  variant="body2"
+                  color="#fff"
+                  mt={1}
+                  textAlign={"center"}
+                >
                   No {showStock.value.toLocaleUpperCase()} found.
                 </Typography>
               )}
             </Box>
           </Grid>
         )}
+        <Button
+          fullWidth
+          variant="contained"
+          sx={{ backgroundColor: "#2c2c2c", color: "#fff", my: 2 }}
+          onClick={() => {
+            const time = currencySymbols[Math.floor(Math.random() * currencySymbols.length)];
+            setStock(time);
+            setShowTradingTime(true);
+            setShowStock({ value: "otc", type: false })
+
+          }}
+        >
+          Recommended by GPT
+        </Button>
         <Button
           fullWidth
           variant="contained"
