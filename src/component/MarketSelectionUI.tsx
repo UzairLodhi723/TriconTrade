@@ -186,7 +186,7 @@ const MarketSelectionUI: React.FC<marketProps> = ({ setShowMarket }) => {
 
           }}
         >
-          Recommended by GPT
+          Recommended by Chatbot
         </Button>
         <Button
           fullWidth
