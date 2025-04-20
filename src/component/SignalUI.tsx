@@ -24,7 +24,7 @@ interface SignalProps{
         setloader(true)
         var config = {
           method: "get",
-          url:`http://192.168.18.249:4000/api/v1/stock/?stock=${Stock}&time=${Time+"m"}&type=${type}`,
+          url:`http://18.116.184.50:4000/api/v1/stock/?stock=${Stock}&time=${Time+"m"}&type=${type}`,
           headers: { "Content-Type": "application/json" },
         };
         
