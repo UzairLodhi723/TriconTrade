@@ -20,11 +20,12 @@ interface SignalProps{
     const [loader , setloader] = useState(false)
     const date = new Date()
       const handleSelectTime = () => {
-        console.log(Stock, Time+"m","api adtaa")
+        const time = type=="otc"?Time+"min":Time+"m"
+        console.log(Stock, Time+"m","api adtaa",time)
         setloader(true)
         var config = {
           method: "get",
-          url:`http://18.116.184.50:4000/api/v1/stock/?stock=${Stock}&time=${Time+"m"}&type=${type}`,
+          url:`http://18.116.184.50:4000/api/v1/stock/?stock=${Stock}&time=${time}&type=${type}`,
           headers: { "Content-Type": "application/json" },
         };
         

@@ -95,7 +95,10 @@ const MarketSelectionUI: React.FC<marketProps> = ({ setShowMarket }) => {
                 border: showStock.value === "stock" ? "1px solid" : "none",
                 borderColor: showStock.value === "stock" ? "white" : "none",
               }}
-              onClick={() => setShowStock({ value: "stock", type: true })}
+              onClick={() =>{ 
+                setShowStock({ value: "stock", type: true })
+               
+              }}
             >
               STOCK
             </Button>
